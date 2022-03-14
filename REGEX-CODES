@@ -1,0 +1,5 @@
+# Birden fazla gözlem seçmek istediğimiz | kullanırız
+# REF: https://stackoverflow.com/questions/26577516/how-to-test-if-a-string-contains-one-of-the-substrings-in-a-list-in-pandas
+df[df["urls"].str.contains("act.gp|greenpeace|youtube")].shape
+
+
