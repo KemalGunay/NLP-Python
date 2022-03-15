@@ -3,3 +3,41 @@
 df[df["urls"].str.contains("act.gp|greenpeace|youtube")].shape
 
 
+
+
+# Essentials
+import re
+
+# search
+re.search("Kemal","Merhaba ben Kemal, senin adın nedir?") # Kemal gelimesini arattırdık, span çıktısı hangi aralıkta olduğunu verir
+
+
+# start()
+### Bu method aratılan kelimenin, kaynakta nerede geçtiğini döndürür.
+
+kontrol = re.search("Kemal","Merhaba ben Kemal, senin adın nedir?") 
+kontrol.start()
+
+
+# end()
+### Üstteki start methodunun tersini yapar, yani aratılan kelime hangi aralıkta geçiyorsa onun son değerini döndürür. 
+
+kontrol = re.search("Kemal","Merhaba ben Kemal, senin adın nedir?") 
+kontrol.end()
+
+
+
+# endpos() 
+### Boşluklar ve diğer tüm yazı karakterlerinin toplamını verir.
+
+metin = "Merhaba ben Kemal, senin adın nedir?"
+kontrol = re.search("Kemal",metin)
+kontrol.endpos
+
+### kontrol etmek için yukarıdaki çıktınıın değeri aşağı kısma yazılır
+metin[:çıkan_çıktı_değer]
+'Merhaba ben Kemal, senin adın nedir?'
+
+
+
+
