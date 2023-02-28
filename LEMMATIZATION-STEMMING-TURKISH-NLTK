@@ -1,0 +1,41 @@
+import pandas as pd
+import nltk
+from nltk.stem import WordNetLemmatizer, SnowballStemmer
+from nltk.corpus import stopwords
+nltk.download('wordnet')
+nltk.download('stopwords')
+nltk.download('punkt')
+
+# Load the Twitter DataFrame
+twitter_df = pd.read_csv('twitter_data.csv')
+
+# Create a lemmatizer object for Turkish language
+lemmatizer = WordNetLemmatizer()
+
+# Create a stemmer object for Turkish language
+stemmer = SnowballStemmer('turkish')
+
+# Define a function for lemmatization and stemming
+def preprocess_tweet(text):
+    # Tokenize the tweet
+    words = nltk.word_tokenize(text)
+
+    # Remove stop words
+    words = [word for word in words if word not in stopwords.words('turkish')]
+
+    # Lemmatize each word in the tweet
+    lemmatized_words = [lemmatizer.lemmatize(word, 'v') for word in words]
+
+    # Stem each word in the tweet
+    stemmed_words = [stemmer.stem(word) for word in words]
+
+    # Join the lemmatized and stemmed words back into a string
+    preprocessed_text = ' '.join(lemmatized_words + stemmed_words)
+
+    return preprocessed_text
+
+# Apply the preprocessing function to the 'text' column of the Twitter DataFrame
+twitter_df['preprocessed_text'] = twitter_df['text'].apply(preprocess_tweet)
+
+# Print the preprocessed tweets
+print(twitter_df['preprocessed_text'])
